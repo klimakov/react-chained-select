@@ -1,0 +1,19 @@
+<data>
+  <select id="a" name="a">
+    <option value="a1">a1</option>
+    <option value="a2">a2</option>
+    <option value="a3">a3</option>
+  </select>
+  <select id="b" name="b">
+    <option value="b1">b1</option>
+    <option value="b2">b2</option>
+    <option value="b3">b3</option>
+  </select>
+  <select id="c" name="c">
+    <option value="a1" class="a1">anything starting a1</option>
+    <option value="a1b1" class="a1\b1">a1b1</option>
+    <option value="a1b1_a1b2" class="a1\b1 a1\b2">a1b1 or a1b2</option>
+    <option value="a2b2" class="a2\b2">a2b2</option>
+    <option value="a2b3" class="a2\b3">a2b3</option>
+  </select>
+</data>

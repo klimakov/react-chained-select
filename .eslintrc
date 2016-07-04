@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true,
+    "es6": true,
+  },
+  "plugins": [
+    "babel",
+  ],
+  "rules": {
+    // Lee Byron made a good point about the dangers of new-cap rule.
+    // https://github.com/eslint/eslint/issues/2023#issuecomment-80255655
+    "new-cap": 0,
+  }
+}
