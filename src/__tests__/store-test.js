@@ -16,6 +16,9 @@ describe('Store for React Chained Select', () => {
   });
 
   it('should load data from example.xml', () => {
-
+    const state = store.getState();
+    const firstSelect = state.selects.first();
+    const name = firstSelect.get('name');
+    expect(name).to.be.equal('mark');
   });
 });
