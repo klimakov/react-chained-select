@@ -5,16 +5,16 @@ const EMPTY_OPTION = "--";
 const ROOT_CLS = '__root'; //FIXME: find better place for constant (this constant was copy-pasted from store.js)
 
 function renderOptions(select, selected) {
-  let options = select.get('options');
-  let filteredOpts = options.filter( opt => {
+  const options = select.get('options');
+  const filteredOpts = options.filter( opt => {
     let cls = opt.get('classifier');
     return (cls.contains(ROOT_CLS) || cls.isSubset(selected));
   });
-  let flattenedOpts = filteredOpts.flatMap( opt => opt.get('values') );
-  let augmentedOpts = flattenedOpts.unshift(
+  const flattenedOpts = filteredOpts.flatMap( opt => opt.get('values') );
+  const augmentedOpts = flattenedOpts.unshift(
     Map({id: EMPTY_OPTION, name: EMPTY_OPTION})
   );
-  let renderingOptions = augmentedOpts.map( value => {
+  const renderingOptions = augmentedOpts.map( value => {
     return (
       <option value={ value.get('id') } key={ value.get('id') }>
         { value.get('name') }
@@ -35,10 +35,10 @@ export function ChainedSelect({ selects, selected, toSelect }) {
   if (selected.isEmpty()) {
     selected = List([EMPTY_OPTION]);
   }
-  let lastSelected = (selected.last() === EMPTY_OPTION) ? 0: 1;
-  let selectsCount = Math.min(selected.count() + lastSelected, selects.count());
-  let viewableSelects = selects.take( selectsCount );
-  let renderingSelects = viewableSelects.map( (select, idx) => {
+  const lastSelected = (selected.last() === EMPTY_OPTION) ? 0: 1;
+  const selectsCount = Math.min(selected.count() + lastSelected, selects.count());
+  const viewableSelects = selects.take( selectsCount );
+  const renderingSelects = viewableSelects.map( (select, idx) => {
     return (
       <select
         key={ idx }

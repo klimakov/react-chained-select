@@ -6,18 +6,18 @@ const ROOT_CLS = '__root';
 const source = require('xml!./data/example.xml');
 
 function transformSource(source) {
-  let jsMap = source.data.select.map( x => {
-      let select = {
+  const jsMap = source.data.select.map( x => {
+      const select = {
         id: x.$.id,
         name: x.$.name
       };
-      let classMap = {};
+      const classMap = {};
       x.option.forEach( y => {
-        let values = {
+        const values = {
           id: y.$.value,
           name: y._,
         };
-        let classifiers = y.$.class ? y.$.class.split(' ') : [ROOT_CLS];
+        const classifiers = y.$.class ? y.$.class.split(' ') : [ROOT_CLS];
         classifiers.forEach( classifier => {
           if (! classMap[classifier]) {
             classMap[classifier] = [];
