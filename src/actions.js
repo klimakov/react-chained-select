@@ -1,6 +1,6 @@
 export const SELECT = 'SELECT';
 
-export function select(idx, value) {
+export function toSelect(idx, value) {
   return {
     type: SELECT,
     idx,

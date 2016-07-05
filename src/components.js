@@ -24,27 +24,26 @@ function renderOptions(select, selected) {
   return renderingOptions.toJS();
 }
 
-function handleSelectChange(idx) {
+function handleSelectChange(idx, toSelect) {
   return  (e) => {
-    console.log(idx);
-    console.log(e.target.value);
+    toSelect(idx, e.target.value);
   }
 }
 
 
-export function ChainedSelect({ selects, selected }) {
-  selected = List(['audi', 'a5']); // FIXME
+export function ChainedSelect({ selects, selected, toSelect }) {
   if (selected.isEmpty()) {
     selected = List([EMPTY_OPTION]);
   }
-  let selectsCount = selected.count();
+  let lastSelected = (selected.last() === EMPTY_OPTION) ? 0: 1;
+  let selectsCount = Math.min(selected.count() + lastSelected, selects.count());
   let viewableSelects = selects.take( selectsCount );
-  let list = viewableSelects.map( (select, idx) => {
+  let renderingSelects = viewableSelects.map( (select, idx) => {
     return (
       <select
         key={ idx }
         value={ selected.get(idx) }
-        onChange={ handleSelectChange(idx) }
+        onChange={ handleSelectChange(idx, toSelect) }
       >
         { renderOptions(select, selected) }
       </select>
@@ -52,7 +51,7 @@ export function ChainedSelect({ selects, selected }) {
   }).toJS();
   return (
     <div>
-      {list}
+      { renderingSelects }
     </div>
   );
 }
@@ -60,4 +59,5 @@ export function ChainedSelect({ selects, selected }) {
 ChainedSelect.propTypes = {
   selects: React.PropTypes.instanceOf(List).isRequired,
   selected: React.PropTypes.instanceOf(List).isRequired,
+  toSelect: PropTypes.func.isRequired,
 };
