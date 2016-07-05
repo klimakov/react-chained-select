@@ -19,6 +19,6 @@ describe('Store for React Chained Select', () => {
     const state = store.getState();
     const firstSelect = state.selects.first();
     const name = firstSelect.get('name');
-    expect(name).to.be.equal('mark§ ');
+    expect(name).to.be.equal('mark');
   });
 });
