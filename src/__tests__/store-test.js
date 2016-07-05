@@ -1,10 +1,8 @@
-import "babel-polyfill";
-import React from 'react';
+import 'babel-polyfill';
 import { expect } from 'chai';
 import { store } from '../store'; // eslint-disable-line import/no-unresolved
 
 describe('Store for React Chained Select', () => {
-
   it('should contain "selected" element', () => {
     const state = store.getState();
     expect(state).to.have.property('selected');

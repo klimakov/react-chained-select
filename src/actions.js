@@ -5,5 +5,5 @@ export function toSelect(idx, value) {
     type: SELECT,
     idx,
     value,
-  }
+  };
 }

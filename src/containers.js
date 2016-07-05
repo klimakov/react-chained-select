@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toSelect: (idx, value) => dispatch(toSelect(idx,value)),
+  toSelect: (idx, value) => dispatch(toSelect(idx, value)),
 });
 
 export const ChainedSelect = connect(
