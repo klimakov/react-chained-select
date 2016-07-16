@@ -1,20 +1,22 @@
 import { createStore } from 'redux';
 import { fromJS, List } from 'immutable';
 import reducer from './reducer';
-import { ROOT_CLS, EMPTY_OPTION_STRING } from './constants';
-
+import { ROOT_CLS, EMPTY_OPTION_STRING,
+  ID_FIELD, NAME_FIELD,
+  CLASSIFIER_FIELD, VALUES_FIELD, OPTIONS_FIELD } from './constants';
 
 function transformSource(source) {
   const jsMap = source.data.select.map(x => {
     const select = {
-      id: x.$.id,
-      name: x.$.name,
+      [ID_FIELD]: x.$.id,
+      [NAME_FIELD]: x.$.name,
+      [OPTIONS_FIELD]: [],
     };
     const classMap = {};
     x.option.forEach(y => {
       const values = {
-        id: y.$.value,
-        name: y._,
+        [ID_FIELD]: y.$.value,
+        [NAME_FIELD]: y._,
       };
       const classifiers = y.$.class ? y.$.class.split(' ') : [ROOT_CLS];
       classifiers.forEach(classifier => {
@@ -25,11 +27,10 @@ function transformSource(source) {
       });
     });
 
-    select.options = [];
     for (const classifier of Object.keys(classMap)) {
-      select.options.push({
-        classifier: classifier.split('\\'),
-        values: classMap[classifier],
+      select[OPTIONS_FIELD].push({
+        [CLASSIFIER_FIELD]: classifier.split('\\'),
+        [VALUES_FIELD]: classMap[classifier],
       });
     }
     return select;

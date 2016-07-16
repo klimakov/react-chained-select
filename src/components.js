@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 import { List, Map } from 'immutable';
-import { ROOT_CLS, EMPTY_OPTION_STRING } from './constants';
+import { ROOT_CLS, EMPTY_OPTION_STRING,
+  ID_FIELD, NAME_FIELD,
+  CLASSIFIER_FIELD } from './constants';
 
 const EMPTY_OPTION = Map({ id: EMPTY_OPTION_STRING, name: EMPTY_OPTION_STRING });
 
 function renderOptions(select, selected) {
   const options = select.get('options');
   const filteredOpts = options.filter(opt => {
-    const cls = opt.get('classifier');
+    const cls = opt.get(CLASSIFIER_FIELD);
     return (cls.contains(ROOT_CLS) || cls.isSubset(selected));
   });
   const flattenedOpts = filteredOpts.flatMap(opt => opt.get('values'));
@@ -16,8 +18,8 @@ function renderOptions(select, selected) {
     EMPTY_OPTION
   );
   const renderingOptions = augmentedOpts.map(value =>
-    <option value={value.get('id')} key={value.get('id')}>
-      {value.get('name')}
+    <option value={value.get(ID_FIELD)} key={value.get(ID_FIELD)}>
+      {value.get(NAME_FIELD)}
     </option>
   );
   return renderingOptions.toJS();
